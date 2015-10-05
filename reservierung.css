@@ -1,0 +1,49 @@
+#asset {
+	font-weight: bold !important;
+}
+th, td {
+	text-align:center !important;
+	white-space:nowrap !important;
+	vertical-align: middle !important;
+}
+th {
+	font-weight:bold !important;
+}
+.blocked {
+	background: rgba(155,155,155,0.5) !important;
+	font-weight:bold !important;
+	cursor: pointer;
+}
+.week {
+	border-left: 3px solid !important;
+}
+#tabelle-reservierungen {
+	background-color: white;
+}
+#tabelle-reservierungen input{
+	margin-right: -10px;
+	margin-top: -10px;
+	margin-bottom: -10px;
+}
+#tabelle-reservierungen select{
+	margin-left: -10px;
+	margin-top: -10px;
+	margin-bottom: -10px;
+}
+#block-region-side-pre, #page-navbar, #page-footer {
+	display:none;
+}
+.table-responsive {
+}
+.headcol {
+}
+#table-container {
+	overflow-x: auto;
+	width: !important;
+}
+.disabled {
+	opacity: 0.5;
+}
+#res-form {
+	margin-top:1em;
+}
