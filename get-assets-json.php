@@ -6,7 +6,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/waltergasse/code/config.php');
 require_once('setup-db-waltergasse-json.php');
 
 $sql = <<<SQL
-	SELECT `id`, `beschreibung`, `wochen`
+	SELECT `id`, `beschreibung`, `wochen`, `bemerkung`
 	FROM `reservierungsdings` 
 	WHERE 1
 	ORDER BY `id` ASC;
@@ -21,7 +21,8 @@ while($row = $result->fetch_assoc()){
     $json[]= array(
 		'id' => $row['id'],
 		'name' => $row['beschreibung'],
-		'limit' => $row['wochen']
+		'limit' => $row['wochen'],
+		'bemerkung' => $row['bemerkung']
     );
 }
 

@@ -57,6 +57,25 @@ mr_reservierung.get_time_restriction_for_selected_asset = function() {
 	return jQuery('#asset option[value='+asset_id+']').attr('data-limit');
 }
 
+mr_reservierung.show_asset_note = function() {
+	var asset_id = jQuery("#asset").val();
+	var note_text = jQuery('#asset option[value='+asset_id+']').attr('data-bemerkung');
+	var note_container = jQuery("#assetnote");
+	if (note_text.length == 0) {
+		if (note_container.length > 0) {
+			note_container.remove();
+		}
+	}
+	else {
+		if (note_container.length > 0) {
+			note_container.html('Hinweis: '+note_text);
+		}
+		else {
+			jQuery("#res-form").append('<p id="assetnote" class="error">Hinweis: '+note_text+'</p>')
+		}
+	}
+}
+
 mr_reservierung.update = function(){
 	var i;
 	var j;
@@ -228,7 +247,7 @@ mr_reservierung.load_asset_options = function(){
 		else {
 			var options_text = '';
 			jQuery.each( data, function( key, obj ) {
-				options_text += '<option data-limit="'+obj['limit']+'" value="'+obj['id']+'">'+obj['name']+'</option>';
+				options_text += '<option data-bemerkung="'+obj['bemerkung']+'" data-limit="'+obj['limit']+'" value="'+obj['id']+'">'+obj['name']+'</option>';
 			});
 			jQuery('#asset').html(options_text);
 			var fragment = window.location.hash.substr(1); 
@@ -243,8 +262,10 @@ mr_reservierung.load_asset_options = function(){
 					window.location.hash = '#'+jQuery("#asset").val();
 					// jQuery("a[href*='/moodle/login/']").attr('href',mr_reservierung.base_login_url+'?goto='+location.href);
 					mr_reservierung.update();
+					mr_reservierung.show_asset_note();
 				}
 			});
+			mr_reservierung.show_asset_note();
 			mr_reservierung.load_school_hours();
 		}
 	});
