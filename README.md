@@ -6,3 +6,4 @@ system for reservations in Moodle
 
 - show vacations
 - insert timetable / delete all old reservations for these days
+- enable user notification in make-reservation-json.php when tested
