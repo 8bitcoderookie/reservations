@@ -1,11 +1,10 @@
 <?php
-exit("Wartungsmodus...");
+// exit("Wartungsmodus...");
 
 /* *****************************************************
-     author: Michael Rundel
-       date: 16.07.2015
+author: Michael Rundel
+date: 16.07.2015
 description: moodle page for reservation overview
-
 ****************************************************** */
 
 // imports
@@ -24,10 +23,7 @@ $PAGE->set_pagelayout('standard');
 $htmlTitle = 'Reservierungen';
 $htmlHeading = $htmlTitle;
 
-$device = isset($_REQUEST['device']) ? $_REQUEST['device'] : '';
-if ($device == 'kiosk') {
-	$_SESSION['mr_kiosk'] = 'yes';
-}
+$device = isset($device) ? $device : ''; // maybe set by kiosk wraper file "index-kiosk.php"
 
 //-------------------
 global $PAGE, $OUTPUT;
@@ -36,17 +32,19 @@ $PAGE->set_title($htmlTitle); // optional
 $PAGE->navbar->add($htmlTitle);
 echo $OUTPUT->header();
 // echo $OUTPUT->heading($htmlHeading);
-if (isset($_SESSION['mr_kiosk'])) {
+if ($device == 'kiosk') {
 	echo '<script type="text/javascript">var mr_runs_in_kiosk_mode = true;</script>';
+	$errorReportButtonHTML = '<input type="button" value="Fehler melden" style="float:right;" onclick="window.location.href=\'/moodle/admin/brg4/errorReport-kiosk.php\'"/>';
 }
 else {
 	echo '<script type="text/javascript">var mr_runs_in_kiosk_mode = false;</script>';
+	$errorReportButtonHTML = '';
 }
 ?>
 	<form id="res-form">
 		<h1>
 			<select name="asset" id="asset"></select>
-			<span> &nbsp;&nbsp;&nbsp;&nbsp;Reservierungen</span>
+			<span> &nbsp;&nbsp;&nbsp;&nbsp;Reservierungen</span><?php echo $errorReportButtonHTML; ?>
 		</h1>
 	</form>
 	<div class="table-responsive" id="table-container">
